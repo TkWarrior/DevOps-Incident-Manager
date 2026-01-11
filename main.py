@@ -12,3 +12,4 @@ if __name__ == "__main__":
     print("\n🧠 ERROR:", result["error_summary"])
     print("\n🔍 ROOT CAUSE:", result["root_cause"])
     print("\n🛠 FIX:", result["fix"])
+    print("\n� PATCH:\n", result["patch"])
