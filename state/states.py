@@ -5,3 +5,4 @@ class IncidentState(TypedDict):
     error_summary: str
     root_cause: str
     fix: str
+    patch: str

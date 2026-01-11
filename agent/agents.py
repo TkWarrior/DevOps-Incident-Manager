@@ -29,4 +29,16 @@ def fix_agent(state):
     """
     return {"fix": ask(prompt)}
 
+# Agent for generating code patch and adding patch to the state
+def patch_agent(state):
+    prompt = f"""
+    Error:
+    {state['error_summary']}
 
+    Root cause:
+    {state['root_cause']}
+
+    Suggest a Java code patch for this bug.
+    Provide only the fixed method.
+    """
+    return {"patch": ask(prompt)}
