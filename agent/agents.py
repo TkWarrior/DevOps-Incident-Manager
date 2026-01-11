@@ -1,5 +1,6 @@
 from llm import ask
 
+# Agent for log readin and adding error summary to the state
 def log_reader_agent(state):
     prompt = f"""
     Extract the main error from these logs:
@@ -8,6 +9,7 @@ def log_reader_agent(state):
     """
     return {"error_summary": ask(prompt)}
 
+# Agent for root cause analysis and adding root cause to the state
 def root_cause_agent(state):
     prompt = f"""
     Error:
@@ -17,6 +19,7 @@ def root_cause_agent(state):
     """
     return {"root_cause": ask(prompt)}
 
+# Agent for suggesting code fix and adding fix to the state
 def fix_agent(state):
     prompt = f"""
     Root cause:
@@ -25,3 +28,5 @@ def fix_agent(state):
     Suggest a safe code fix in simple terms.
     """
     return {"fix": ask(prompt)}
+
+
