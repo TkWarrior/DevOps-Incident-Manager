@@ -20,23 +20,13 @@ def create_pr(repo_name, file_path, logs ,patch_code):
     except:
         pass  # branch already exists
     
-    # Get the file contents from AI branch
-    file = repo.get_contents(file_path, ref=branch_name)
-
-    # Decode the file content to string
-    original = file.decoded_content.decode()
-  
-    # Extract line number from logs
-    line_no = extract_line_number(logs)
-  
-    start , end = find_method(original, line_no)
-    
-    # Get the original method code (for reference, not used further)
-    broken_method = "\n".join(original.split("\n")[start:end+1])
+    # Get the broken method details--file content, method start and end lines
+    broken_method, original, start ,end = broken_method(repo_name, file_path ,logs)
    
     # Replace the method with the patch code
     updated = replace_method(original, start, end, patch_code)
     
+    file = repo.get_contents(file_path, ref=branch_name)
     # commit to AI branch in the repository
     repo.update_file(
         path=file_path,
