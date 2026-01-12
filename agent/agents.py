@@ -32,13 +32,25 @@ def fix_agent(state):
 # Agent for generating code patch and adding patch to the state
 def patch_agent(state):
     prompt = f"""
-    Error:
-    {state['error_summary']}
+    You are an autonomous software engineer fixing a production bug.
+
+    This function caused a runtime error:
+
+    <FUNCTION>
+    {state['broken_method']}
+    </FUNCTION>
 
     Root cause:
     {state['root_cause']}
 
-    Suggest a Java code patch for this bug.
-    Provide only the fixed method.
+    Rules:
+    - You MUST return the SAME function (same name, parameters, routes, decorators, framework)
+    - Modify ONLY the function body to fix the bug
+    - Do NOT change imports, file structure, or surrounding code
+    - Do NOT invent new classes, types, or return values
+    - Do NOT add explanations or comments
+    - Output ONLY valid code
+
+    Return the corrected function:
     """
     return {"patch": ask(prompt)}

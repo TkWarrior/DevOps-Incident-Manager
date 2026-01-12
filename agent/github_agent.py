@@ -1,6 +1,7 @@
 from github import Github
 import os
-from utils.utils import extract_line_number, find_method, replace_method
+from utils.get_broken_method import get_broken_method
+from utils.replace_method import replace_method
 
 g = Github(os.getenv("GITHUB_TOKEN"))
 
@@ -21,7 +22,7 @@ def create_pr(repo_name, file_path, logs ,patch_code):
         pass  # branch already exists
     
     # Get the broken method details--file content, method start and end lines
-    broken_method, original, start ,end = broken_method(repo_name, file_path ,logs)
+    broken_method, original, start ,end = get_broken_method(repo_name, file_path ,logs)
    
     # Replace the method with the patch code
     updated = replace_method(original, start, end, patch_code)

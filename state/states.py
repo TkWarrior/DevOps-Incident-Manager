@@ -1,5 +1,4 @@
 from typing_extensions import TypedDict
-from agent.github_agent import broken_method
 
 class IncidentState(TypedDict):
     logs: str

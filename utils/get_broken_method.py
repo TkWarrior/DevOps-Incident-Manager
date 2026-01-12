@@ -1,6 +1,7 @@
 from github import Github
 import os
-from utils.utils import extract_line_number, find_method
+from utils.extract_line_number import extract_line_number
+from utils.find_method import find_method
 
 def get_broken_method(repo_name, file_path, logs):
     g = Github(os.getenv("GITHUB_TOKEN"))
