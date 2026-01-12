@@ -7,12 +7,14 @@ g = Github(os.getenv("GITHUB_TOKEN"))
 # agent pull request karega with the suggested code fix
 # Function to create a pull request with the suggested code fix
 def create_pr(repo_name, file_path, logs ,patch_code):
+    # get the repository name
     repo = g.get_repo(repo_name)
-    
+    # get the main branch
     base = repo.get_branch("main")
     # craete a new branch from main
     branch_name = "ai-fix-branch"
     
+    # Create branch if it doesn't exist
     try:
         repo.create_git_ref(ref=f"refs/heads/{branch_name}", sha=base.commit.sha)
     except:
