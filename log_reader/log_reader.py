@@ -6,6 +6,18 @@ def fetch_logs():
     r = requests.get(url)
     return r.text
 
+def extract_recent_error(logs, max_lines=50):
+    lines = logs.split("\n")
+
+    # find last ERROR or Exception
+    for i in range(len(lines)-1, -1, -1):
+        if "Exception" in lines[i] or "ERROR" in lines[i]:
+            start = max(0, i - max_lines)
+            return "\n".join(lines[start:i+1])
+
+    # fallback: last 100 lines
+    return "\n".join(lines[-100:])
+
 def has_error(logs):
     return "Exception" in logs or "ERROR" in logs
 

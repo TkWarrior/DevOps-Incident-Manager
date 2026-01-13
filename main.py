@@ -36,22 +36,25 @@
     
 #     print("pull request created at:", pull_request_url)
 
-from log_reader.log_reader import fetch_logs
+from log_reader.log_reader import fetch_logs,extract_recent_error
 from graph.graph import agent
 from agent.github_agent import create_pr
 from utils.get_broken_method import get_broken_method
 from utils.clean_patch import clean_patch
 
-def run_agent():
-    logs = fetch_logs()
 
+def run_agent():
+    
+    logs = fetch_logs()
+    recent_logs = extract_recent_error(logs)
     repo_name = "TkWarrior/crash_simulator"
     file_path = "src/main/java/com/example/demo/controller/CrashController.java"
-
+    print("Fetched Logs:\n", logs)
+    print("Recent Logs:\n", recent_logs)
     broken_method, source, start, end = get_broken_method(repo_name, file_path, logs)
 
     result = agent.invoke({
-        "logs": logs,
+        "logs": recent_logs,
         "broken_method": broken_method
     })
 

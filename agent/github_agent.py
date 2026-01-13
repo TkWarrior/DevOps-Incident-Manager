@@ -1,5 +1,6 @@
 from github import Github
 import os
+import time
 from utils.get_broken_method import get_broken_method
 from utils.replace_method import replace_method
 
@@ -13,7 +14,7 @@ def create_pr(repo_name, file_path, logs ,patch_code):
     # get the main branch
     base = repo.get_branch("main")
     # craete a new branch from main
-    branch_name = "ai-fix-branch"
+    branch_name = f"ai-fix-branch-{int(time.time())}"
     
     # Create branch if it doesn't exist
     try:
