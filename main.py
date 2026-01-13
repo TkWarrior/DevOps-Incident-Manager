@@ -41,7 +41,7 @@ from graph.graph import agent
 from agent.github_agent import create_pr
 from utils.get_broken_method import get_broken_method
 from utils.clean_patch import clean_patch
-
+from utils.extract_line_number import extract_line_number
 
 def run_agent():
     
@@ -49,10 +49,10 @@ def run_agent():
     recent_logs = extract_recent_error(logs)
     repo_name = "TkWarrior/crash_simulator"
     file_path = "src/main/java/com/example/demo/controller/CrashController.java"
-    print("Fetched Logs:\n", logs)
-    print("Recent Logs:\n", recent_logs)
-    broken_method, source, start, end = get_broken_method(repo_name, file_path, logs)
-
+    broken_method, source, start, end = get_broken_method(repo_name, file_path, recent_logs)
+    print("LOG SAYS ERROR HERE:", extract_line_number(logs))
+    print("METHOD WE ARE PATCHING:\n", broken_method)
+    
     result = agent.invoke({
         "logs": recent_logs,
         "broken_method": broken_method

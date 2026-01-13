@@ -32,25 +32,26 @@ def fix_agent(state):
 # Agent for generating code patch and adding patch to the state
 def patch_agent(state):
     prompt = f"""
-    You are an autonomous software engineer fixing a production bug.
+    You are an autonomous code-fixing agent.
 
-    This function caused a runtime error:
-
+    This is the exact function that caused a runtime error:
     <FUNCTION>
-    {state['broken_method']}
+    {state["broken_method"]}
     </FUNCTION>
 
     Root cause:
-    {state['root_cause']}
+    {state["root_cause"]}
 
     Rules:
-    - You MUST return the SAME function (same name, parameters, routes, decorators, framework)
-    - Modify ONLY the function body to fix the bug
-    - Do NOT change imports, file structure, or surrounding code
-    - Do NOT invent new classes, types, or return values
-    - Do NOT add explanations or comments
-    - Output ONLY valid code
+    - Return the SAME function signature
+    - Do NOT change routes, annotations, decorators, or names
+    - Modify ONLY the function body
+    - The function must NEVER throw the same runtime exception again
+    - Do NOT add comments
+    - Do NOT add explanations
+    - Do NOT output multiple options
+    - Output ONLY the corrected function
 
-    Return the corrected function:
+    Return the fixed function now:
     """
     return {"patch": ask(prompt)}
