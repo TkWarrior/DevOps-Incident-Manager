@@ -1,3 +1,4 @@
+![AI Agent](https://img.shields.io/badge/AI-Agentic%20Workflow-orange)![DevOps](https://img.shields.io/badge/DevOps-Automation-blue)![Status](https://img.shields.io/badge/Status-Active-success)
 # AI DevOps Agent - Automated Incident Analysis & Fix PR Generator
 
 An agentic AI system that analyzes runtime errors from application logs, identifies the root cause, generates a safe code fix, and automatically opens a GitHub Pull Request — all from a single click.
@@ -35,7 +36,7 @@ Demonstrates fault analysis, automation, and system thinking
 Highlights practical DevOps + AI integration
 
 ## High-Level Architecture
-
+```
 Frontend (React)
    |
    |  POST /run
@@ -49,7 +50,7 @@ Backend (FastAPI)
    |-- Store incident
    v
 PostgreSQL (Incident History)
-
+```
 
 ## Agent Workflow
 
