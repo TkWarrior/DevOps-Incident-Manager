@@ -145,4 +145,6 @@ https://www.linkedin.com/posts/talibul-haque-khan-61971b1b9_ai-devops-aiops-acti
 
 Built by Talibul Haque Khan
 
+## License
+This project is licensed under the Apache 2.0 License.
 
