@@ -47,6 +47,7 @@ def run_agent():
     
     logs = fetch_logs()
     recent_logs = extract_recent_error(logs)
+    print("recent logs : ",recent_logs)
     repo_name = "TkWarrior/crash_simulator"
     file_path = "src/main/java/com/example/demo/controller/CrashController.java"
     broken_method, source, start, end = get_broken_method(repo_name, file_path, recent_logs)

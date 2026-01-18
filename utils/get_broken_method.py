@@ -11,6 +11,7 @@ def get_broken_method(repo_name, file_path, logs):
     source = file.decoded_content.decode()
 
     line_no = extract_line_number(logs)
+    print(f"Extracted line number: {line_no}")
     if not line_no:
         raise Exception("Could not extract line number from logs")
 
